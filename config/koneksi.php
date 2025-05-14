@@ -1,15 +1,12 @@
 <?php
-// Konfigurasi database
-$host = "localhost"; // Host database
-$user = "root"; // Username default phpMyAdmin
-$password = ""; // Password default (kosong jika belum diatur)
-$database = "perpustakaan_pinan"; // Nama database
+$host = 'localhost';
+$user = 'root';
+$password = '';
+$database = 'perpustakaan_pinan';
 
-// Membuat koneksi
 $koneksi = mysqli_connect($host, $user, $password, $database);
 
-// Cek koneksi
 if (!$koneksi) {
-    die("Koneksi ke database gagal: " . mysqli_connect_error());
+    die('Koneksi gagal: ' . mysqli_connect_error());
 }
 ?>
