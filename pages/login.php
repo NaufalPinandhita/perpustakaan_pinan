@@ -32,6 +32,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : null;
             </div>
             <div class="d-flex justify-content-between align-items-center mt-3">
                 <button type="submit" class="btn btn-secondary">Login</button>
+                <a href="../index.php#about">belum memiliki akun?</a>
             </div>
         </form>
     </div>

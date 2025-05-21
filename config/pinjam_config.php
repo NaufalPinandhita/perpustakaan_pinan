@@ -5,7 +5,6 @@ if (isset($_POST['submit'])) {
     $id_buku = $_POST['id_buku'];
     $nama_peminjam = $_POST['nama_peminjam'];
     $tanggal_pinjam = $_POST['tanggal_pinjam'];
-    $tanggal_kembali = $_POST['tanggal_kembali'];
 
     // Cek stok
     $cek = mysqli_query($koneksi, "SELECT stok FROM buku WHERE id = $id_buku");
@@ -16,8 +15,8 @@ if (isset($_POST['submit'])) {
         exit;
     }
 
-    // Masukkan ke tabel peminjaman
-    $query = "INSERT INTO peminjaman (id_buku, nama_peminjam, tanggal_pinjam, tanggal_kembali, status) VALUES ('$id_buku', '$nama_peminjam', '$tanggal_pinjam', '$tanggal_kembali', 'dipinjam')";
+    // Masukkan ke tabel peminjaman tanpa tanggal_kembali
+    $query = "INSERT INTO peminjaman (id_buku, nama_peminjam, tanggal_pinjam, status) VALUES ('$id_buku', '$nama_peminjam', '$tanggal_pinjam', 'dipinjam')";
 
     // Kurangi stok
     $updateStok = "UPDATE buku SET stok = stok - 1 WHERE id = $id_buku";

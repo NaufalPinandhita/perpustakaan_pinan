@@ -15,7 +15,11 @@ if (mysqli_num_rows($result) > 0) {
     $_SESSION['role'] = $user['role'];
     
     $success = urlencode("Login successful!");
-    header("Location: ../pages/dashboard.php?success=" . $success);
+    if ($user['role'] == 'admin') {
+        header("Location: ../pages/dashboard.php?success=" . $success);
+    } else {
+        header("Location: ../index.php?success=" . $success);
+    }
 }
 else {
     $error = urlencode("Invalid username or password!");

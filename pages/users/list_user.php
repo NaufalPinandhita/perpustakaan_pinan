@@ -42,61 +42,40 @@ $totalPages = ceil($total / $limit);
     <title>List User</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../../assets/sidebar.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <img src="../../assets/img/logo.png" alt="" width="30px" class="d-inline-block align-text-top">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item ms-3">
-                        <a class="nav-link" href="#"><?php echo $_SESSION['username']; ?></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="../dashboard.php">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Pages
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="../buku/list_buku.php">Daftar Buku</a></li>
-                            <li><a class="dropdown-item" href="../buku/list_buku.php">Tambah Buku</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="../../config/logout.php">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <form class="d-flex" role="search" method="GET" action="list_user.php">
-                <input class="form-control me-2" type="search" name="search" placeholder="Search by name"
-                    aria-label="Search"
-                    value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+    <div class="sidebar">
+        <div class="text-center mb-4">
+            <img src="../../assets/img/avatar.jpg" alt="Admin" class="rounded-circle" width="80">
+            <h5 class="mt-2"><?php echo $_SESSION['username']?></h5>
+            <p><span class="badge bg-success">Online</span></p>
         </div>
-    </nav>
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Daftar Pengguna</h1>
-        <table class="table table-bordered table-striped">
-            <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Nama User</th>
-                    <th>Roles</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
+        <a href="../dashboard.php"><i class="fas fa-home me-2"></i>Dashboard</a>
+        <a href="../buku/list_buku.php"><i class="fas fa-book me-2"></i>Kelola Buku</a>
+        <a href="../buku/daftar_pinjaman.php"><i class="fas fa-sync-alt me-2"></i>Peminjaman</a>
+        <a href="list_user.php" class="active"><i class="fas fa-users me-2"></i>Daftar User</a>
+        <a href="../signup.php"><i class="fas fa-user-plus me-2"></i>Tambah User</a>
+        <a href="../../config/logout.php"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+    </div>
+    <div class="content">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-3 bg-light p-3 rounded">
+                <h2 class="mb-0">Daftar User</h2>
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama User</th>
+                        <th>Roles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
                 if ($result && mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>";
@@ -109,43 +88,43 @@ $totalPages = ceil($total / $limit);
                     echo "<tr><td colspan='3' class='text-center'>Tidak ada data pengguna.</td></tr>";
                 }
                 ?>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
 
-        <p class="text-end">Total Pengguna: <strong><?php echo htmlspecialchars($total); ?></strong></p>
+            <p class="text-end">Total Pengguna: <strong><?php echo htmlspecialchars($total); ?></strong></p>
 
-        <!-- Pagination -->
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <?php if ($page > 1): ?>
-                <li class="page-item">
-                    <a class="page-link" href="?page=<?php echo $page - 1; ?>">Previous</a>
-                </li>
-                <?php else: ?>
-                <li class="page-item disabled">
-                    <a class="page-link">Previous</a>
-                </li>
-                <?php endif; ?>
+            <!-- Pagination -->
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <?php if ($page > 1): ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?page=<?php echo $page - 1; ?>">Previous</a>
+                    </li>
+                    <?php else: ?>
+                    <li class="page-item disabled">
+                        <a class="page-link">Previous</a>
+                    </li>
+                    <?php endif; ?>
 
-                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
-                    <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                </li>
-                <?php endfor; ?>
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
+                        <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    </li>
+                    <?php endfor; ?>
 
-                <?php if ($page < $totalPages): ?>
-                <li class="page-item">
-                    <a class="page-link" href="?page=<?php echo $page + 1; ?>">Next</a>
-                </li>
-                <?php else: ?>
-                <li class="page-item disabled">
-                    <a class="page-link">Next</a>
-                </li>
-                <?php endif; ?>
-            </ul>
-        </nav>
+                    <?php if ($page < $totalPages): ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?page=<?php echo $page + 1; ?>">Next</a>
+                    </li>
+                    <?php else: ?>
+                    <li class="page-item disabled">
+                        <a class="page-link">Next</a>
+                    </li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+        </div>
     </div>
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

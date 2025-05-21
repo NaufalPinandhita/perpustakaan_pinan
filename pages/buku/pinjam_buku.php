@@ -1,11 +1,21 @@
 <?php
 include '../../config/koneksi.php';
 session_start();
+
+if ($_SESSION['role'] != 'user') {
+    header("Location: ../dashboard.php");
+    exit;
+}
 $id_buku = $_GET['id'];
+
 $q1 = mysqli_query($koneksi, "SELECT * FROM buku WHERE id = $id_buku");
 $buku = mysqli_fetch_assoc($q1);
 $q2 = mysqli_query($koneksi, "SELECT * FROM users WHERE username = '" . $_SESSION['username'] . "'");
 $user = mysqli_fetch_assoc($q2);
+if ($buku['stok'] <= 0) {
+    echo "<script>alert('Stok buku tidak tersedia'); window.location.href = '../buku/list_buku.php';</script>";
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -15,8 +25,9 @@ $user = mysqli_fetch_assoc($q2);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Peminjaman Buku</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/stylebs.css">
 </head>
-<body>
+<body style="color: black;">
 <div class="container mt-5">
     <h2 class="text-center mb-4">Form Peminjaman Buku</h2>
     <form action="../../config/pinjam_config.php" method="post" class="shadow p-4 rounded bg-light">
@@ -37,12 +48,8 @@ $user = mysqli_fetch_assoc($q2);
             <input type="date" class="form-control" name="tanggal_pinjam" required>
         </div>
 
-        <div class="mb-3">
-            <label class="form-label">Tanggal Kembali:</label>
-            <input type="date" class="form-control" name="tanggal_kembali" required>
-        </div>
-
-        <button type="submit" name="submit" class="btn btn-primary w-100">Pinjam</button>
+        <button type="submit" name="submit" class="btn btn-primary">Pinjam</button>
+        <a href="list_buku.php" class="btn btn-primary text-white">Kembali</a>
     </form>
 </div>
 
