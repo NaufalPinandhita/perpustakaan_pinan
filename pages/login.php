@@ -21,7 +21,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : null;
             <?= htmlspecialchars($error) ?>
         </div>
         <?php endif; ?>
-        <form action="../config/proses_login.php" method="post">
+        <form action="../config/auth/login.php" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username">

@@ -1,5 +1,5 @@
 <?php
-require_once '../../config/koneksi.php';
+include '../../config/database.php';
 session_start();
 // Jika belum login, redirect ke login
 if (!isset($_SESSION['username'])) {
@@ -25,7 +25,7 @@ $pengarangResult = $koneksi->query("SELECT DISTINCT pengarang FROM buku ORDER BY
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <!-- Theme CSS (variabel & override) -->
-    <link rel="stylesheet" href="../../assets/theme.css">
+    <link rel="stylesheet" href="../../assets/css/theme.css">
 </head>
 
 <body>
@@ -40,25 +40,25 @@ $pengarangResult = $koneksi->query("SELECT DISTINCT pengarang FROM buku ORDER BY
                 <p><span class="badge bg-success">Online</span></p>
             </div>
             <a href="../dashboard.php"><i class="fas fa-home me-2"></i>Dashboard</a>
-            <a href="list_buku.php" class="active"><i class="fas fa-book me-2"></i>Kelola Buku</a>
-            <a href="daftar_pinjaman.php"><i class="fas fa-sync-alt me-2"></i>Peminjaman</a>
-            <a href="../users/list_user.php"><i class="fas fa-users me-2"></i>Daftar User</a>
-            <a href="../signup.php"><i class="fas fa-user-plus me-2"></i>Tambah User</a>
-            <a href="../config/logout.php"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+            <a href="book_list.php" class="active"><i class="fas fa-book me-2"></i>Kelola Buku</a>
+            <a href="borrow_history.php.php"><i class="fas fa-sync-alt me-2"></i>Peminjaman</a>
+            <a href="../users/user_list.php"><i class="fas fa-users me-2"></i>Daftar User</a>
+            <a href="../register.php"><i class="fas fa-user-plus me-2"></i>Tambah User</a>
+            <a href="../../config/auth/logout.php"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
         </div>
         <div class="content">
             <?php else: ?>
             <!-- Navbar untuk User -->
             <nav class="navbar navbar-expand-lg navbar-light shadow-sm fixed-top bg-white">
                 <div class="container">
-                    <a class="navbar-brand fw-bold" href="#home">Perpustakaan Pinan</a>
+                    <a class="navbar-brand fw-bold" href="#home"><img src="../../assets/img/logo.png" alt="perpustakaan-pinan" width="30"
+                    height="26">Perpustakaan Pinan</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item"><a class="nav-link" href="../../index.php#home">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="../../index.php#features">Fitur</a></li>
                             <li class="nav-item"><a class="nav-link" href="">Buku</a></li>
                             <li class="nav-item"><a class="nav-link" href="../../index.php#contact">Kontak</a></li>
                         </ul>
@@ -73,9 +73,10 @@ $pengarangResult = $koneksi->query("SELECT DISTINCT pengarang FROM buku ORDER BY
                         ?>
                             </button>
                             <ul class="dropdown-menu p-1">
-                                <li><a class="nav-link btn-primary rounded p-1 mb-1" href="../../config/logout.php">Logout</a>
+                                <li><a class="nav-link btn-primary rounded p-1 mb-1"
+                                        href="../../config/auth/logout.php">Logout</a>
                                 </li>
-                                <li><a class="nav-link btn-primary rounded p-1" href="pages/users/reset_pass.php">Reset
+                                <li><a class="nav-link btn-primary rounded p-1" href="../users/reset_password.php">Reset
                                         Password</a></li>
                             </ul>
                         </div>
@@ -89,7 +90,7 @@ $pengarangResult = $koneksi->query("SELECT DISTINCT pengarang FROM buku ORDER BY
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h1 class="display-5 fw-bold">Koleksi Buku</h1>
                     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                    <a href="tambah_buku.php" class="btn btn-primary btn-lg rounded-pill">Tambah Buku</a>
+                    <a href="add_book.php" class="btn btn-primary btn-lg rounded-pill">Tambah Buku</a>
                     <?php endif; ?>
                 </div>
 

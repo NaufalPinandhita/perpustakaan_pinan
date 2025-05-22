@@ -1,5 +1,5 @@
 <?php
-include 'koneksi.php';
+include '../database.php';
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     echo "Parameter id tidak valid.";

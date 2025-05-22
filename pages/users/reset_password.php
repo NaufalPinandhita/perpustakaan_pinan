@@ -1,5 +1,5 @@
 <?php
-include '../../config/koneksi.php';
+include '../../config/database.php';
 session_start();
 if (!isset($_SESSION['username'])) {
     header("Location: ../login.php?login=failed");
@@ -71,6 +71,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : null;
                 <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
             </div>
             <button type="submit" name="submit" class="btn btn-secondary">Reset Password</button>
+            <a href="../../index.php" class="btn btn-secondary text-white" style="text-decoration: none;">Kembali</a>
         </form>
     </div>
 </body>

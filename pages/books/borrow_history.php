@@ -1,10 +1,6 @@
 <?php
-include '../../config/koneksi.php';
+include '../../config/database.php';
 session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: ../../pages/login.php");
-    exit;
-}
 if ($_SESSION['role'] != 'admin') {
     header("Location: ../../pages/dashboard.php");
     exit;
@@ -43,7 +39,7 @@ $query = mysqli_query($koneksi, "SELECT p.*, b.judul
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../../assets/sidebar.css">
+    <link rel="stylesheet" href="../../assets/css/theme.css">
 </head>
 
 <body>
@@ -54,11 +50,11 @@ $query = mysqli_query($koneksi, "SELECT p.*, b.judul
             <p><span class="badge bg-success">Online</span></p>
         </div>
         <a href="../dashboard.php"><i class="fas fa-home me-2"></i>Dashboard</a>
-        <a href="list_buku.php"><i class="fas fa-book me-2"></i>Kelola Buku</a>
-        <a href="daftar_pinjaman.php" class="active"><i class="fas fa-sync-alt me-2"></i>Peminjaman</a>
-        <a href="../users/list_user.php"><i class="fas fa-users me-2"></i>Daftar User</a>
-        <a href="../signup.php"><i class="fas fa-user-plus me-2"></i>Tambah User</a>
-        <a href="../../config/logout.php"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+        <a href="book_list.php" class="active"><i class="fas fa-book me-2"></i>Kelola Buku</a>
+        <a href="borrow_history.php.php"><i class="fas fa-sync-alt me-2"></i>Peminjaman</a>
+        <a href="../users/user_list.php"><i class="fas fa-users me-2"></i>Daftar User</a>
+        <a href="../register.php"><i class="fas fa-user-plus me-2"></i>Tambah User</a>
+        <a href="../../config/auth/logout.php"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
     </div>
     <div class="content">
         <div class="container">

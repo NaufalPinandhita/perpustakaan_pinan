@@ -1,6 +1,6 @@
 <?php
 // Koneksi Database
-include 'config/koneksi.php';
+include 'config/database.php';
 session_start();
 
 // Ambil Top 4 Buku Favorit (terbanyak dipinjam)
@@ -24,7 +24,7 @@ $resultFavorit = $koneksi->query($sqlFavorit);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- AOS Animation CSS -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/theme.css">
+    <link rel="stylesheet" href="assets/css/theme.css">
 </head>
 
 <body>
@@ -56,8 +56,8 @@ $resultFavorit = $koneksi->query($sqlFavorit);
                         ?>
                     </button>
                     <ul class="dropdown-menu p-1">
-                        <li><a class="nav-link btn-primary rounded p-1 mb-1" href="config/logout.php">Logout</a></li>
-                        <li><a class="nav-link btn-primary rounded p-1" href="pages/users/reset_pass.php">Reset Password</a></li>
+                        <li><a class="nav-link btn-primary rounded p-1 mb-1" href="config/auth/logout.php">Logout</a></li>
+                        <li><a class="nav-link btn-primary rounded p-1" href="pages/users/reset_password.php">Reset Password</a></li>
                     </ul>
                 </div>
                 <?php endif; ?>
@@ -139,7 +139,7 @@ $resultFavorit = $koneksi->query($sqlFavorit);
                 <?php else: ?>
                 <p class="text-center">Belum ada data buku favorit.</p>
                 <?php endif; ?>
-                <a href="pages/buku/list_buku.php" class="btn btn-primary btn-lg rounded-pill mt-4">Jelajahi Buku</a>
+                <a href="pages/books/book_list.php" class="btn btn-primary btn-lg rounded-pill mt-4">Jelajahi Buku</a>
             </div>
     </section>
 
@@ -181,7 +181,7 @@ $resultFavorit = $koneksi->query($sqlFavorit);
     <!-- Footer -->
     <footer class="py-4 text-center footer">
         <div class="container">
-            <small>&copy; 2025 Perpustakaan Elegan. Semua hak dilindungi.
+            <small>&copy; 2025 Perpustakaan Pinan. Semua hak dilindungi.
         </div>
     </footer>
 

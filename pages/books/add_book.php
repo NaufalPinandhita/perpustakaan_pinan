@@ -1,7 +1,7 @@
 <?php
-include '../../config/koneksi.php';
+include '../../config/database.php';
 session_start();
-if (isset($_SESSION['admin'])) {
+if (!isset($_SESSION['admin'])) {
     header("Location: ../../index.php");
     exit;
 }
@@ -31,11 +31,11 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
             <p><span class="badge bg-success">Online</span></p>
         </div>
         <a href="../dashboard.php"><i class="fas fa-home me-2"></i>Dashboard</a>
-        <a href="list_buku.php" class="active"><i class="fas fa-book me-2"></i>Kelola Buku</a>
-        <a href="daftar_pinjaman.php"><i class="fas fa-sync-alt me-2"></i>Peminjaman</a>
-        <a href="list_user.php"><i class="fas fa-users me-2"></i>Daftar User</a>
-        <a href="../signup.php"><i class="fas fa-user-plus me-2"></i>Tambah User</a>
-        <a href="../../config/logout.php"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+        <a href="book_list.php" class="active"><i class="fas fa-book me-2"></i>Kelola Buku</a>
+        <a href="borrow_history.php.php"><i class="fas fa-sync-alt me-2"></i>Peminjaman</a>
+        <a href="../users/user_list.php"><i class="fas fa-users me-2"></i>Daftar User</a>
+        <a href="../register.php"><i class="fas fa-user-plus me-2"></i>Tambah User</a>
+        <a href="../../config/auth/logout.php"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
     </div>
     <div class="content">
         <div class="mx-auto" style="width: 100%; margin-top: 20px;">

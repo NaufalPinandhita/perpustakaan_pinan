@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'koneksi.php';
+include '../database.php';
 
 $username = $_POST['username'];
 $password = md5($_POST['password']);
@@ -16,12 +16,12 @@ if (mysqli_num_rows($result) > 0) {
     
     $success = urlencode("Login successful!");
     if ($user['role'] == 'admin') {
-        header("Location: ../pages/dashboard.php?success=" . $success);
+        header("Location: ../../pages/dashboard.php?success=" . $success);
     } else {
-        header("Location: ../index.php?success=" . $success);
+        header("Location: ../../index.php?success=" . $success);
     }
 }
 else {
     $error = urlencode("Invalid username or password!");
-    header("Location: ../pages/login.php?error=" . $error);
+    header("Location: ../../pages/login.php?error=" . $error);
 }

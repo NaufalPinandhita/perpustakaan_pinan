@@ -1,5 +1,5 @@
 <?php
-require_once 'koneksi.php';
+include '../database.php';
 
 // membuat variabel
 $judulBuku = "";

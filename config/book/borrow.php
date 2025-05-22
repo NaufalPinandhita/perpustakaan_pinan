@@ -1,5 +1,5 @@
 <?php
-include 'koneksi.php';
+include '../database.php';
 
 if (isset($_POST['submit'])) {
     $id_buku = $_POST['id_buku'];
@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
     $updateStok = "UPDATE buku SET stok = stok - 1 WHERE id = $id_buku";
 
     if (mysqli_query($koneksi, $query) && mysqli_query($koneksi, $updateStok)) {
-        echo "<script>alert('Peminjaman berhasil!'); window.location.href = '../pages/buku/list_buku.php';</script>";
+        echo "<script>alert('Peminjaman berhasil!'); window.location.href = '../../pages/books/book_list.php';</script>";
     } else {
         echo "Gagal meminjam buku: " . mysqli_error($koneksi);
     }

@@ -1,6 +1,6 @@
 <?php
 // search.php
-require_once '../config/koneksi.php';
+require_once 'database.php';
 session_start();
 
 // Ambil parameter
@@ -83,13 +83,13 @@ if ($result && $result->num_rows) {
                     Deskripsi
                 </button>
                 <?php if ($_SESSION['role'] == 'admin'): ?>
-                <a href="edit_buku.php?id=<?= htmlspecialchars($b['id']) ?>"
+                <a href="edit_book.php?id=<?= htmlspecialchars($b['id']) ?>"
                     class="btn btn-sm btn-outline-primary d-flex align-items-center justify-content-center">
                     <i class="bi bi-pencil-square"></i>
                 </a>
                 <?php elseif ($_SESSION['role'] == 'user'): ?>
                 <?php if ($b['stok'] > 0): ?>
-                <a href="pinjam_buku.php?id=<?= htmlspecialchars($b['id']) ?>"
+                <a href="borrow_book.php?id=<?= htmlspecialchars($b['id']) ?>"
                     class="btn btn-sm btn-outline-primary d-flex align-items-center justify-content-center">
                     <i class="bi bi-bookmark-plus" style="font-size: 1rem;"></i>
                 </a>
